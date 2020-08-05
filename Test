@@ -1,0 +1,37 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="RegressionTesting">
+<listeners>  
+<listener class-name="com.MercuryTours.qa.RetryLogic.AnnotationTransformer"/>
+<listener class-name="com.MercuryTours.qa.ExtentReport.Testlisten"/>
+</listeners>
+<test name="Test-1">
+<groups>  
+<run>  
+<include name="Home"/>  
+</run>  
+</groups>  
+ <classes>
+ <class name="com.MercuryTours.qa.Home.HomePageTest"/>
+ </classes>
+ </test>
+ <test name="Test-2">
+<groups>  
+<run>  
+<include name="Registration"/>  
+</run>  
+</groups>  
+ <classes>
+ <class name="com.MercuryTours.qa.Register.RegistrationPageTest"/>
+ </classes>
+  </test>
+  <test name="Test-3">
+<groups>  
+<run>  
+<include name="Car Rentals"/>  
+</run>  
+</groups>  
+ <classes>
+ <class name="com.MercuryTours.qa.CarRentals.CarRentalsTest"/>
+ </classes>
+ </test>
+  </suite>
