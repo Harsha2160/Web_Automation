@@ -15,10 +15,11 @@ public class RegistrationPageTest extends TestBase{
 	RegistrationPage RP;
 
 	@Test(groups="Registration")
-	public void PageTitle_Registration() {
+	public void PageTitle_Registration() throws IOException {
 		ActualResult=driver.getTitle();
 		SoftAssert SA=new SoftAssert();
-		SA.assertEquals(ActualResult, "Register: Mercury Tours");
+		String ExpectedTitle=ObjectArray_Input.Fetch_ExpectedResult();
+		SA.assertEquals(ActualResult, ExpectedTitle);
 		RP = new RegistrationPage();
 		SA.assertAll();
 	}
@@ -27,14 +28,15 @@ public class RegistrationPageTest extends TestBase{
 	public Object[][] Register_Data() throws IOException 
 	{
 		//Returning Method inside a Method
-		return ObjectArray_Input.Register_data();                   
+		return ObjectArray_Input.Fetch_TestData();                   
 	}
 
 	@Test(dataProvider="Register_Data", groups="Registration", dependsOnMethods="PageTitle_Registration")
-	public void REGISTER(String Firstname, String Lastname, Long Phonenumber) 
+	public void REGISTER(String Firstname, String Lastname, Long Phonenumber) throws IOException 
 	{
 	ActualResult=RP.Register(Firstname,Lastname ,Phonenumber);
-	Assert.assertEquals(ActualResult, "Home");
+	String ExpectedResult=ObjectArray_Input.Fetch_ExpectedResult();
+	Assert.assertEquals(ActualResult, ExpectedResult);
 	}
 	
 	

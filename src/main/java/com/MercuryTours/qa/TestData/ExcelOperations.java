@@ -16,8 +16,9 @@ public class ExcelOperations {
 	private static XSSFWorkbook Workbook = null;
 	private static XSSFSheet sheet = null;
 	private static FileOutputStream fileout = null;
+	private static int rownum=1;
 
-	public static Object[][] Read(String path, String Sheet_name) throws IOException
+	public static Object[][] Read_TestData(String path, String Sheet_name) throws IOException
 
 	    {
 		file = new FileInputStream(path);
@@ -60,4 +61,19 @@ public class ExcelOperations {
 		fileout.close();
 
 	    }
+	public static String Read_ExpectedResult(String path, String Sheet_name) throws IOException
+	    {
+		
+		file = new FileInputStream(path);
+		Workbook = new XSSFWorkbook(file);
+		sheet = Workbook.getSheet(Sheet_name);
+		String ExpectedResult=sheet.getRow(rownum).getCell(1).getStringCellValue();
+		rownum++;
+		return ExpectedResult;
+		
+	    
+	    
+	    
+	    }
+	
         }

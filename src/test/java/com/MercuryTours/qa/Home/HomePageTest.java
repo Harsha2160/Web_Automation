@@ -23,12 +23,12 @@ public class HomePageTest extends TestBase {
 	
 	
 	@Test(groups="Home")
-	public void PageTitle_Home() 
+	public void PageTitle_Home() throws IOException 
 	{
 		initialization();
 		ActualResult=driver.getTitle();
 		SoftAssert SA=new SoftAssert();
-		String ExpectedTitle="Welcome: Mercury Tours";
+		String ExpectedTitle=ObjectArray_Input.Fetch_ExpectedResult();
 		SA.assertEquals(ActualResult, ExpectedTitle);
 		hp = new HomePage(); 
 		SA.assertAll();
@@ -40,15 +40,15 @@ public class HomePageTest extends TestBase {
 	
 	@DataProvider
 	public Object[][] Login_Data() throws IOException {
-		return ObjectArray_Input.Login_Array();                       //Returning Method inside a Method
+		return ObjectArray_Input.Fetch_TestData();                       //Returning Method inside a Method
 	}
 
 	
 	@Test(dataProvider="Login_Data", groups="Home", dependsOnMethods="PageTitle_Home")
-	public void Home(String username, String Password) 
+	public void Home(String username, String Password) throws IOException 
 	{
 	ActualResult=hp.Login(username, Password);
-	String ExpectedResult="REGISTER";
+	String ExpectedResult=ObjectArray_Input.Fetch_ExpectedResult();
 	Assert.assertEquals(ActualResult, ExpectedResult);
 	
 	
