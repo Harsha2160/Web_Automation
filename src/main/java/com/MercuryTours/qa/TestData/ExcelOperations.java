@@ -61,7 +61,7 @@ public class ExcelOperations {
 		fileout.close();
 
 	    }
-	public static String Read_ExpectedResult(String path, String Sheet_name) throws IOException
+     public static String Read_ExpectedResult(String path, String Sheet_name) throws IOException
 	    {
 		
 		file = new FileInputStream(path);
@@ -71,9 +71,6 @@ public class ExcelOperations {
 		rownum++;
 		return ExpectedResult;
 		
-	    
-	    
-	    
 	    }
 	
         }

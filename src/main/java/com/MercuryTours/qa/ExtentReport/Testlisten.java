@@ -21,8 +21,10 @@ public class Testlisten implements ITestListener {
 	Screenshot sc;
 	ReportCategory_Conditionalities RCC;
 	public static ExtentTest logger;
-	public static ExtentReports extent;
-	public static ExtentSparkReporter SparkReporter;
+	private static ExtentReports extent;
+	private static ExtentSparkReporter SparkReporter;
+	public static int Sheetnum=1;
+	private static Object[] InputParameters;
 	public static String packagename;
 
 	public void onTestSuccess(ITestResult result) {
@@ -37,6 +39,9 @@ public class Testlisten implements ITestListener {
 	public void onTestSkipped(ITestResult result) {
 		
 		logger = extent.createTest(result.getName());
+		InputParameters=result.getParameters();
+		if (InputParameters != null)
+			Sheetnum++;
 		packagename=result.getTestClass().getRealClass().getPackage().getName();
 		RCC=new ReportCategory_Conditionalities();
 	
