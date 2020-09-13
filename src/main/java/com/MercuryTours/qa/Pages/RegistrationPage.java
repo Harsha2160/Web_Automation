@@ -29,6 +29,8 @@ public class RegistrationPage extends TestBase {
 	WebElement Car_Rentals;
 	
 	
+	
+	
 	public RegistrationPage()
 	{
 		PageFactory.initElements(driver, RegistrationPage.this);

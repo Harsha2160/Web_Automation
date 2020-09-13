@@ -11,6 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 
+
+
 public class ExcelOperations {
 	public static Object[][] arr = null;
 
@@ -18,7 +20,7 @@ public class ExcelOperations {
 	private static XSSFWorkbook Workbook = null;
 	private static XSSFSheet sheet = null;
 	private static FileOutputStream fileout = null;
-	private static int rownum=1;
+	
 
 	public static Object[][] Read_TestData(String path, String Sheet_name) throws IOException
 
@@ -63,14 +65,13 @@ public class ExcelOperations {
 		fileout.close();
 
 	    }
-     public static String Read_ExpectedResult(String path, String Sheet_name) throws IOException
+     public static String Read_ExpectedResult(String path, String Sheet_name, int rownum_ExpectedResult) throws IOException
 	    {
 		
 		file = new FileInputStream(path);
 		Workbook = new XSSFWorkbook(file);
 		sheet = Workbook.getSheet(Sheet_name);
-		String ExpectedResult=sheet.getRow(rownum).getCell(1).getStringCellValue();
-		rownum++;
+		String ExpectedResult=sheet.getRow(rownum_ExpectedResult).getCell(1).getStringCellValue();
 		return ExpectedResult;
 		
 	    }

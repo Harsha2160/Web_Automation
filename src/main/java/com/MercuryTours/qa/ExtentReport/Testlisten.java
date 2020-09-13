@@ -1,6 +1,8 @@
 package com.MercuryTours.qa.ExtentReport;
 
 
+
+
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -23,34 +25,40 @@ public class Testlisten implements ITestListener {
 	public static ExtentTest logger;
 	private static ExtentReports extent;
 	private static ExtentHtmlReporter HtmlReporter;
-	public static int Sheetnum=1;
-	private static Object[] InputParameters;
+	public static int Sheetnum=0;
+	public static int rownum_ExpectedResult=1;
+	public static Object[] InputParameters;
+	public static Object[] TempParameters;
 	public static String packagename;
-
 	public void onTestSuccess(ITestResult result) {
 		logger = extent.createTest(result.getName());
 		packagename=result.getTestClass().getRealClass().getPackage().getName();
 		RCC=new ReportCategory_Conditionalities();
-		
 		logger.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " Test Case PASSED", ExtentColor.GREEN));
-
+		rownum_ExpectedResult++;
 	}
 
 	public void onTestSkipped(ITestResult result) {
 		
 		logger = extent.createTest(result.getName());
-		InputParameters=result.getParameters();
-		if (InputParameters != null)
-			Sheetnum++;
+		String Throwable_Message=result.getThrowable().getMessage();
 		packagename=result.getTestClass().getRealClass().getPackage().getName();
 		RCC=new ReportCategory_Conditionalities();
-	
+		
+		if(Throwable_Message.contains("depends"))
+		{
+		if(InputParameters!=null)
+		Sheetnum++;
+		rownum_ExpectedResult++;
+		}
+		else
+		TempParameters=result.getParameters();
+		
 		logger.log(Status.SKIP,
 				MarkupHelper.createLabel(result.getName() + " - Test Case Skipped", ExtentColor.ORANGE));
-		logger.log(Status.SKIP,
+	    logger.log(Status.SKIP,
 				MarkupHelper.createLabel(result.getThrowable() + " - Test Case Skipped", ExtentColor.ORANGE));
-		
-	}
+	    }
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 
@@ -77,6 +85,7 @@ public class Testlisten implements ITestListener {
 		logger = extent.createTest(result.getName());
 		packagename=result.getTestClass().getRealClass().getPackage().getName();
 		RCC=new ReportCategory_Conditionalities();
+	    rownum_ExpectedResult++;
 		logger.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " - Test Case Failed", ExtentColor.RED));
 		logger.log(Status.FAIL,
 				MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
@@ -91,8 +100,11 @@ public class Testlisten implements ITestListener {
     }
 
 	public void onTestStart(ITestResult result) {
+		InputParameters=result.getParameters();
 		
-
-	}
-
+		
+		}
 }
+	
+
+
