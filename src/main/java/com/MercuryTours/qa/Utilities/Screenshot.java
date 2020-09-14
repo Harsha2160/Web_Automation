@@ -14,7 +14,6 @@ import com.aventstack.extentreports.ExtentTest;
 	public Screenshot(ExtentTest logger) 
 	{
     
-	//ExtentTest logger = Testlisten.logger;
 	File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 	try 
 	{

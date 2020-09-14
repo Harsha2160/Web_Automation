@@ -34,7 +34,7 @@ public class HomePageTest extends TestBase {
 		SA.assertAll();
       //Soft Assertion can be used if there are lines below Assertion statement in a TC.
 	  //Because we want to execute the statements after Assertion
-	//If we need Setup Test in the Report, avoid using Before class.
+	
 	}
 	
 	
